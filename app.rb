@@ -45,15 +45,27 @@ patch('/divisions/:id') do
   @division = Division.find(params.fetch("id").to_i())
   @division.update({:name => name})
   @divisions = Division.all()
-  erb(:index)
+  erb(:divisions)
 end
+
+#Delete Division
+delete("/divisions/:id") do
+  @division = Division.find(params.fetch("id").to_i())
+  @division.delete()
+  @divisions = Division.all()
+  erb(:divisions)
+end
+
+
+
+
 #adds employee to division
 post("/employees") do
   name = params.fetch("name")
   division_id = params.fetch("division_id").to_i
   @division = Division.find(division_id)
   @employee = Employee.create({:name => name, :division_id => division_id })
-  redirect "/divisions"
+  erb(:division)
 end
 
 get('/employees/:id/edit') do
@@ -61,6 +73,7 @@ get('/employees/:id/edit') do
   erb(:employee_edit)
 end
 
+#update Employee
 patch("/employees/:id") do
   name = params.fetch("name")
   @employee = Employee.find(params.fetch("id").to_i)
@@ -71,4 +84,12 @@ patch("/employees/:id") do
   #Because you are returning to divisions it needs redefined below. Or use redirect as above
   # @divisions = Division.all()
   # erb(:divisions)
+end
+
+#Delete Employee
+delete("/employees/:id") do
+  @employee = Employee.find(params.fetch("id").to_i())
+  @employee.delete()
+  @employees = Employee.all()
+  redirect "divisions"
 end
