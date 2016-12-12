@@ -1,0 +1,19 @@
+<h1>Your Current Divisons</h1>
+
+<a href="/divisions">View All divisions</a><br>
+<a href="/divisions/new">Add New divisions</a>
+
+<% if @divisions.any?() %>
+  <h3>Here are your divisions:</h3>
+
+  <ul>
+    <% @divisions.each() do |division| %>
+      <li><a href="/divisions/<%= division.id()%>"><%= division.name() %></a><a href="/divisions/<%= division.id() %>/edit"> - Update</a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no divisions yet!</p>
+
+<% end %>
