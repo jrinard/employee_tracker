@@ -5,14 +5,14 @@ require("pg")
 require("sinatra/activerecord")
 require("division")
 require("employee")
-# 
-# RSpec.configure do |config|
-#   config.after(:each) do
-#     Division.all().each do |div|
-#       division.destroy()
-#     end
-#     Employee.all().each do |emp|
-#       emp.destroy()
-#     end
-#   end
-# end
+
+RSpec.configure do |config|
+  config.after(:each) do
+    Division.all().each do |div|
+      div.destroy()
+    end
+    Employee.all().each do |emp|
+      emp.destroy()
+    end
+  end
+end
